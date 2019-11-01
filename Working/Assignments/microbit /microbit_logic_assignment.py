@@ -39,7 +39,7 @@ while True:
         elif temperature() > 30:
             display.scroll("Put your plant somewhere cooler!!")
             led_red.write_digital(1)
-            led_green.write_digital(0)
+            #led_green.write_digital(0)
             music.play(music.tune2)
         else:
             display.scroll("Put your plant somewhere hotter!!")
@@ -54,13 +54,13 @@ while True:
             music.play(music.tune)
             display.scroll("The moisture is perfect!")
         elif mositure_sensor(1) > 50:
-            display.scroll("Your moisture level is", moisture_sensor.read_digit)
+            display.scroll("Your moisture level is", moisture_sensor.read_digital())
             display.scroll("Water your plant less!!")
             led_green.write_digital(1)
             led_red.write_digital(0)
             music.play(music.tune2)
         else:
-            display.scroll("Your moisture level is", moisture_sensor.read_digit)
+            display.scroll("Your moisture level is", moisture_sensor.read_digital())
             display.scroll("Water your plant more!!")
             led_green.write_digital(1)
             led_red.write_digital(0)
