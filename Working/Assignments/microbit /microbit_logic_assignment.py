@@ -41,7 +41,6 @@ while True:
             led_green.write_digital(0)
             music.play(music.DADADADUM)
             display.scroll("Put your plant somewhere hotter!!")
-			
     elif button_b.is_pressed():
         # check if the moisture level is equal to 50.
         if (moisture_sensor.read_analog() < 500):
