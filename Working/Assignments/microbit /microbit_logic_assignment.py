@@ -20,50 +20,44 @@ import music
 sound = pin0
 moisture_sensor = pin1
 led_red = pin2
-led_green = pin3
-
-tune = ["C4:4", "D", "E", "C", "C", "D", "E", "C", "E", "F", "G:8",
-        "E:4", "F", "G:8"]
-tune2 = ["D4:4", "E4:4", "F4:4", "D4:4", "E4:4", "F4:4", "D4:4", "E4:4",
-         "F4:4", "G4:4", "D4:8", "G4:4", "D4:4", "G4:8"]
+led_green = pin16
 
 while True:
     # sensor temperature
     if button_a.is_pressed():
-        # check if temperature is equal to 30 degrees celecius
+        # check if temperature is equal to 30 degrees celsius
         if temperature() == 30:
             led_green.write_digital(1)
             led_red.write_digital(0)
-            music.play(music.tune)
             display.scroll("The temperature is perfect!")
+            music.play(music.NYAN)
         elif temperature() > 30:
-            display.scroll("Put your plant somewhere cooler!!")
-            led_red.write_digital(1)
-            #led_green.write_digital(0)
-            music.play(music.tune2)
-        else:
-            display.scroll("Put your plant somewhere hotter!!")
             led_red.write_digital(1)
             led_green.write_digital(0)
-            music.play(music.tune2)
+            display.scroll("Put your plant somewhere cooler!!")
+            music.play(music.DADADADUM)
+        else:
+            led_red.write_digital(1)
+            led_green.write_digital(0)
+            music.play(music.DADADADUM)
+            display.scroll("Put your plant somewhere hotter!!")
+			
     elif button_b.is_pressed():
         # check if the moisture level is equal to 50.
-        if mositure_sensor() == (50):
-            led_green.write_digital(1)
-            led_red.write_digital(0)
-            music.play(music.tune)
-            display.scroll("The moisture is perfect!")
-        elif mositure_sensor(1) > 50:
-            display.scroll("Your moisture level is", moisture_sensor.read_digital())
-            display.scroll("Water your plant less!!")
-            led_green.write_digital(1)
-            led_red.write_digital(0)
-            music.play(music.tune2)
-        else:
-            display.scroll("Your moisture level is", moisture_sensor.read_digital())
+        if (moisture_sensor.read_analog() < 500):
+            led_green.write_digital(0)
+            led_red.write_digital(1)
             display.scroll("Water your plant more!!")
+            music.play(music.DADADADUM)
+        elif (moisture_sensor.read_analog() > 510):
+            led_green.write_digital(0)
+            led_red.write_digital(1)
+            display.scroll("Water your plant less!!")
+            music.play(music.DADADADUM)
+        else:
+            display.scroll("The moisture is perfect!")
             led_green.write_digital(1)
             led_red.write_digital(0)
-            music.play(music.tune2)
+            music.play(music.NYAN)
     else:
         display.scroll("Error!!")
