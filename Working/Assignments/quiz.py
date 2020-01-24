@@ -1,5 +1,5 @@
 # welcome to Friend Vibes
-print(" ***** Welcome to the Friendly Vibes ******")
+print(" ***** Welcome to the Friendly Vibez ******")
 
 # intalize counters
 total = 0
